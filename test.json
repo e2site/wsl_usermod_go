@@ -1,0 +1,14 @@
+[
+    {
+        "Path":"sdfdsf",
+	    "UID": "string",
+	    "GID": "string",
+	    "FileMod": "string",
+	    "DirectoryMod": "string",
+	    "Skip": false
+    },
+    {
+        "Path":"sdfdsf",
+	    "Skip": false
+    }
+]
