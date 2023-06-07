@@ -1,6 +1,9 @@
 package error
 
-import "fmt"
+import (
+	"fmt"
+	"runtime/debug"
+)
 
 
 
@@ -22,7 +25,10 @@ func (error *AppError) IsError() bool {
 }
 
 func (error *AppError) Print(){
+	fmt.Println("")
 	fmt.Print("Модуль: ",error.Module,", ")
 	fmt.Println(error.Message)
+	debug.PrintStack()
+	fmt.Println("")
 }
 
