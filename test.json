@@ -1,14 +1,22 @@
 [
     {
-        "Path":"sdfdsf",
-	    "UID": "string",
-	    "GID": "string",
-	    "FileMod": "string",
-	    "DirectoryMod": "string",
+        "Path":"/home/filipp/dev/wsl_usermod_go",
+	    "UID": 1239,
+	    "GID": 1239,
+	    "FileMod": "0777",
+	    "DirectoryMod": "0777",
 	    "Skip": false
     },
     {
-        "Path":"sdfdsf",
+        "Path":"/home/filipp",
+	    "UID": 1000,
+	    "GID": 1000,
+	    "FileMod": "0777",
+	    "DirectoryMod": "0777",
 	    "Skip": false
+    },
+    {
+        "Path":"/home/filipp/dev",
+	    "Skip": true
     }
 ]

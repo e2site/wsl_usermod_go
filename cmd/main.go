@@ -1,35 +1,41 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"wsl_usermod_go/config"
 	"wsl_usermod_go/contract"
 	"wsl_usermod_go/error"
+	"wsl_usermod_go/service"
 )
 
 func main() {
-	var a Argv;
-	err := a.ParserArgv();
-	if(err.IsError()) {
-		appError(err)
-	}
+	var argv Argv;
+	err := argv.ParserArgv();
+	appError(err)
 	var config = config.JsonConfig{
-		Path: a.ConfigFilePath,
+		Path: argv.ConfigFilePath,
 	}
-	start(&config)
+	start(&config,argv.CheckExistFiles)
 }
 
-func start(config contract.ConfigContract) {
+func start(config contract.ConfigContract,checkExistFile bool) {
 	configList,err:=config.Parser();
-	if(err.IsError()) {
-		appError(err)
+	appError(err)
+	
+	if(len(*configList.Configs)==0){
+		err := error.AppError{}
+		err.Error("main.go","Нет загруженных конфигурация для работы")
+		appError(err)			
 	}
-	fmt.Println(configList)
-
+	var watcher service.Watcher;
+	var ruleService service.Rule;
+	errWatch := watcher.Watch(&configList,ruleService,checkExistFile);
+	appError(errWatch)
 }
 
 func appError(error error.AppError) {
-	error.Print()
-	os.Exit(1)
+	if(error.IsError()) {
+		error.Print()
+		os.Exit(1)
+	}
 }
