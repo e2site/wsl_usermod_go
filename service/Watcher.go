@@ -91,7 +91,7 @@ func (watcher *Watcher) Watch(configList *model.ConfigList,  ruleService contrac
 }
 
 func (watcher *Watcher) init(configList *model.ConfigList,  ruleService contract.RuleContract,checkExistFile bool) wslerror.AppError{
-	var funcErr = wslerror.AppError{};
+	var funcErr  wslerror.AppError
 
 	for _,pathItem :=  range configList.GetConfigRootPath() {
 		err := filepath.Walk(pathItem, func(path string, info os.FileInfo, err error) error  {
