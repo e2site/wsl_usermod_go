@@ -29,3 +29,21 @@ func (j *JsonConfig) Parser()  (model.ConfigList, error.AppError) {
 	}
 	return configList, moduleError
 }
+
+func (j *JsonConfig) Parser()  (model.ConfigList, error.AppError) {
+	var configs []model.ConfigModal;
+	var configList model.ConfigList;
+	var moduleError error.AppError;
+	data,err := os.ReadFile(j.Path)
+	if(err!=nil) {
+		moduleError.Error("JsonConfig.go",err.Error())
+	} else{
+		err := json.Unmarshal(data,&configs)
+		if(err!=nil) {
+			moduleError.Error("JsonConfig.go",err.Error())
+		} else {
+			configList.Configs = &configs
+		}	
+	}
+	return configList, moduleError
+}
