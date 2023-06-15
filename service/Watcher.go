@@ -59,7 +59,7 @@ func (watcher *Watcher) Watch(configList *model.ConfigList,  ruleService contrac
 						if(!config.Skip) {
 							isDir,dErr := watcher.IsDir(event.Name);
 							if(dErr.IsError()) {
-								pErr.Print();
+								dErr.Print();
 							} else {
 								ruleService.SetRule(event.Name,*config,isDir)
 								if(isDir) {
